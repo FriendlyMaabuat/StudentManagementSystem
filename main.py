@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Student Management System")
-        self.setMinimumSize(600, 400)
+        self.setMinimumSize(400, 310)
 
         file_menu_item = self.menuBar().addMenu("&File")
         help_menu_item = self.menuBar().addMenu("&Help")
@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
 
         about_action = QAction("About", self)
         help_menu_item.addAction(about_action)
+        about_action.triggered.connect(self.about)
 
         search_action = QAction(QIcon("icons/search.png"),"Search", self)
         edit_menu_item.addAction(search_action)
@@ -87,6 +88,18 @@ class MainWindow(QMainWindow):
     def edit(self):
         dialog = EditDialog()
         dialog.exec()
+
+    def about(self):
+        dialog = AboutDialog()
+        dialog.exec()
+
+
+class AboutDialog(QMessageBox):
+    def __init(self):
+        super().__init__()
+        self.setWindowTitle("About")
+        content = 'This app was created during the course "The Python Mega Course", Feel free to modify and reuse.'
+        self.setText(content)
 
 class EditDialog(QDialog):
     def __init__(self):
@@ -181,8 +194,6 @@ class DeleteDialog(QDialog):
         confirmation_widget.setWindowTitle("Success")
         confirmation_widget.setText("Data deleted successfully")
         confirmation_widget.exec()
-
-
 
 
 class InsertDialog(QDialog):
